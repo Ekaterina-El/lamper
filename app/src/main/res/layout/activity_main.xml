@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+        <variable
+            name="viewModel"
+            type="el.ka.lamper.viewModel.ConvertorToBinaryVM" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_centerInParent="true">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-        <ImageView
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:src="@drawable/ic_minus" />
-
-        <TextView
-            android:layout_width="@dimen/counter_value_width"
-            android:gravity="center"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/large_text_size"
-            />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_centerInParent="true">
 
-        <ImageView
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:src="@drawable/ic_add" />
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:onClick="@{() -> viewModel.setNewUserValue(viewModel.userValue - 1)}"
+                android:src="@drawable/ic_minus" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/activity_main_counter_value"
+                android:layout_width="@dimen/counter_value_width"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                tools:text="0"
+                android:text="@{viewModel.userValue.toString()}"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/large_text_size" />
 
-</RelativeLayout>
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:onClick="@{() -> viewModel.setNewUserValue(viewModel.userValue + 1)}"
+                android:src="@drawable/ic_add" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>
